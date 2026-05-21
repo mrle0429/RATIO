@@ -1,0 +1,2 @@
+{"id":"sample_r40","mixed_text":"The introduction was drafted by the student. The method paragraph was rewritten with assistance. The conclusion remains human-written.","target_ai_ratio":0.4,"lir":0.36,"sentence_labels":[0,1,0]}
+{"id":"sample_r80","mixed_text":"The abstract was rewritten with assistance. The first result paragraph was rewritten with assistance. A short limitation paragraph remains human-written.","target_ai_ratio":0.8,"lir":0.72,"sentence_labels":[1,1,0]}

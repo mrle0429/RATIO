@@ -1,0 +1,24 @@
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+
+# Local data and experiment artifacts
+data/
+local_artifacts/
+outputs/
+wandb/
+archive/
+advance_baseline_detector_archive/
+
+# Large model / generated artifact files
+*.pt
+*.pth
+*.pkl
+*.ckpt
+*.safetensors
+*.bin
+
+# Logs and local study databases
+*.log
+*.db
+*.journal

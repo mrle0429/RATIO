@@ -1,0 +1,116 @@
+{
+  "entrypoint": "python -m ratio_detector.train",
+  "purpose": "Reproduce the published RATIO Stage-1 result on the PACT test split.",
+  "source_experiment": {
+    "archive_results": "../advance_baseline_detector_archive/local_artifacts/outputs_stage1_benchmark_grouped/lir_joint_mainreg/results.json",
+    "archive_retest": "../advance_baseline_detector_archive/local_artifacts/outputs_stage1_benchmark_grouped/lir_joint_mainreg/retest_best_model_results.json",
+    "legacy_trainer": "../advance_baseline_detector_archive/archive/root_legacy_code/train_lir_joint.py"
+  },
+  "reported_result": {
+    "test_macro_f1": 0.5961684203974654,
+    "test_mae": 0.1059472484423763,
+    "best_epoch": 2,
+    "per_class_f1": {
+      "0pct": 0.4657534246575342,
+      "20pct": 0.7020602218700476,
+      "40pct": 0.5692041522491349,
+      "60pct": 0.5346968590211834,
+      "80pct": 0.5437201907790143,
+      "100pct": 0.7615756738078784
+    }
+  },
+  "model": {
+    "model_name": "microsoft/deberta-v3-large",
+    "num_classes": 6,
+    "dropout": 0.2,
+    "use_continuous_features": false
+  },
+  "data": {
+    "source": "PACT/datasplit/benchmark_grouped",
+    "train_data": "data/pact/train.jsonl",
+    "val_data": "data/pact/val.jsonl",
+    "test_data": "data/pact/test.jsonl",
+    "max_seq_len": 512
+  },
+  "training": {
+    "batch_size": 8,
+    "epochs": 10,
+    "lr_backbone": 3e-6,
+    "lr_heads": 3e-4,
+    "weight_decay": 0.05,
+    "adam_eps": 1e-6,
+    "warmup_ratio": 0.06,
+    "grad_accum_steps": 3,
+    "max_grad_norm": 0.5,
+    "mixed_precision": "no",
+    "gradient_checkpointing": true,
+    "seed": 42,
+    "num_workers": 4,
+    "pin_memory": true,
+    "persistent_workers": false
+  },
+  "loss": {
+    "w_ce": 1.0,
+    "w_mae": 1.0,
+    "w_mse": 0.0,
+    "w_huber": 0.0,
+    "w_consistency": 0.0,
+    "label_smoothing": 0.0
+  },
+  "sampling_and_weighting": {
+    "use_weighted_sampler": false,
+    "use_class_weights": false,
+    "allow_double_balancing": false,
+    "weighting_method": "sqrt_inverse",
+    "zero_class_boost": 6.0
+  },
+  "auxiliary_targets": {
+    "use_aux_targets": false,
+    "w_aux": 0.0,
+    "w_aux_mse": 0.0,
+    "w_aux_lir": 0.0,
+    "w_aux_jaccard": 1.0,
+    "w_aux_sentence_jaccard": 1.0,
+    "w_aux_cosine": 0.5
+  },
+  "early_stopping": {
+    "monitor_metric": "macro_f1",
+    "early_stop_patience": 3
+  },
+  "command": [
+    "python", "-m", "ratio_detector.train",
+    "--train_data", "data/pact/train.jsonl",
+    "--val_data", "data/pact/val.jsonl",
+    "--test_data", "data/pact/test.jsonl",
+    "--model_name", "microsoft/deberta-v3-large",
+    "--output_dir", "outputs/ratio_stage1",
+    "--max_seq_len", "512",
+    "--batch_size", "8",
+    "--epochs", "10",
+    "--lr_backbone", "3e-6",
+    "--lr_heads", "3e-4",
+    "--dropout", "0.2",
+    "--weight_decay", "0.05",
+    "--adam_eps", "1e-6",
+    "--warmup_ratio", "0.06",
+    "--grad_accum_steps", "3",
+    "--max_grad_norm", "0.5",
+    "--w_ce", "1.0",
+    "--w_mae", "1.0",
+    "--w_mse", "0.0",
+    "--w_huber", "0.0",
+    "--w_consistency", "0.0",
+    "--label_smoothing", "0.0",
+    "--early_stop_patience", "3",
+    "--monitor_metric", "macro_f1",
+    "--mixed_precision", "no",
+    "--gradient_checkpointing",
+    "--num_workers", "4",
+    "--pin_memory",
+    "--no-use_weighted_sampler",
+    "--no-use_class_weights",
+    "--no-use_aux_targets",
+    "--no-use_continuous_features",
+    "--seed", "42"
+  ]
+}

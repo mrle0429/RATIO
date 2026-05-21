@@ -1,0 +1,26 @@
+{
+  "entrypoint": "python -m ratio_rcdpo.train_stage2",
+  "objective": "clean/rewrite supervised detection + RCDPO preference + pair consistency + reference KL",
+  "data": {
+    "source": "PACT/datasplit/rewrite_grouped",
+    "train_data": "data/rewrite/train.jsonl",
+    "val_data": "data/rewrite/val.jsonl",
+    "test_data": "data/rewrite/test.jsonl",
+    "stage1_checkpoint": "outputs/ratio_stage1/best_model.pt"
+  },
+  "defaults": {
+    "batch_size": 8,
+    "epochs": 5,
+    "sup_w_ce": 1.0,
+    "sup_w_mae": 1.0,
+    "sup_w_mse": 0.0,
+    "sup_w_consistency": 0.2,
+    "w_clean_sup": 1.2,
+    "w_rewrite_sup": 1.0,
+    "w_label_dpo": 0.8,
+    "w_pair_consistency": 0.15,
+    "w_clean_ref_kl": 0.2,
+    "dpo_beta": 0.5,
+    "dpo_margin": 0.0
+  }
+}
