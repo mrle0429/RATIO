@@ -130,10 +130,11 @@ h1 {
 }
 
 .links {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  max-width: 760px;
+  max-width: 840px;
   margin: 34px auto 0;
 }
 
@@ -143,11 +144,13 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 9px;
+  padding: 0 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
   color: var(--primary-dark);
   font-weight: 700;
+  white-space: nowrap;
   text-decoration: none;
   transition:
     border-color 180ms ease,
@@ -170,6 +173,10 @@ h1 {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.9;
+}
+
+.demo-link {
+  padding-inline: 20px;
 }
 
 .figure-section {
@@ -237,10 +244,6 @@ figure img {
     padding-top: 32px;
   }
 
-  .links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .summary {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -252,8 +255,8 @@ figure img {
     font-size: 2.1rem;
   }
 
-  .links {
-    grid-template-columns: 1fr;
+  .link-button {
+    width: 100%;
   }
 }
 
